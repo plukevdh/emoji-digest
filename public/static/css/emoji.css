@@ -1,0 +1,24 @@
+
+#content {
+    width: 90%;
+    margin: 10px 40px;
+}
+.row {
+    display: block;
+    text-align: center;
+}
+.emoji-listing {
+    width: 15%;
+    display: inline-block;
+    text-align: center;
+    margin: 5px 0;
+}
+
+.emoji,.name {
+    text-align: center;
+    display: block;
+    margin: auto;
+}
+.emoji {
+    padding: 5px;
+}

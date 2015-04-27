@@ -1,0 +1,8 @@
+%h1 Current Emoji
+
+- emoji.each_slice(5) do |group|
+  .row
+    - group.each do |name, url|
+      .emoji-listing{ class: name }
+        %img.emoji{ src: url, width: '18', height: '18' }
+        %b.name= name
