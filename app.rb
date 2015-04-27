@@ -21,7 +21,14 @@ class App < Roda
     end
 
     r.on "digest" do
-      view 'digest', locals: { emoji: digest.sort }
+      r.on do
+        view 'digest', locals: { emoji: digest.sort }
+      end
+
+      r.on ":year/:week" do
+        date = Date.strptime "#{year},#{week}", "%Y,%W"
+        view 'digest', locals: { emoji: digest_since(date).sort }
+      end
     end
   end
 end
