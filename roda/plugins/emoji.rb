@@ -32,7 +32,10 @@ class Roda
         end
 
         def redis
-          @_redis ||= Redis.new(url: ENV.fetch('REDIS_URL'))
+          @_redis ||= begin
+            _redis_url = ENV['REDIS_URL'] || ENV['REDISTOGO_URL']
+            Redis.new(url: _redis_url)
+          end
         end
       end
     end

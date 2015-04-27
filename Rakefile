@@ -11,9 +11,11 @@ namespace :emoji do
   task :collect do
     require './app'
 
+    _redis_url = ENV['REDIS_URL'] || ENV['REDISTOGO_URL']
+
     begin
       harvester = EmojiHarvester.new Slack.client
-      store = EmojiStore.new Redis.new(url: ENV.fetch('REDIS_URL'))
+      store = EmojiStore.new Redis.new(url: _redis_url)
 
       emoji = harvester.harvest
       store.save(emoji)
