@@ -1,4 +1,8 @@
 %h1 Digest Emoji
+- if defined? date
+  %h3
+    for week of
+    = date.strftime("%m/%d/%Y")
 
 - emoji.each do |group, collection|
   %h3= group.capitalize

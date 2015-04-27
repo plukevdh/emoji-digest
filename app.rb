@@ -3,7 +3,6 @@ require 'roda'
 require './roda/plugins/emoji'
 
 class App < Roda
-  plugin :static, '/static'
   plugin :render,
          ext: "html.haml",
          engine: 'haml'
@@ -21,13 +20,13 @@ class App < Roda
     end
 
     r.on "digest" do
-      r.on do
+      r.get true do
         view 'digest', locals: { emoji: digest.sort }
       end
 
-      r.on ":year/:week" do
+      r.on ":year/:week" do |year, week|
         date = Date.strptime "#{year},#{week}", "%Y,%W"
-        view 'digest', locals: { emoji: digest_since(date).sort }
+        view 'digest', locals: { emoji: digest_since(date).sort, date: date }
       end
     end
   end
