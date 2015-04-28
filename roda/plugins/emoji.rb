@@ -4,6 +4,11 @@ require 'emoji_harvester'
 class Roda
   module RodaPlugins
     module Emoji
+
+      def self.configure(app, options: {})
+        app.opts[:redis] = Redis.new url: (options[:redis_url] || ENV['REDIS_URL'] || ENV['REDISTOGO_URL'])
+      end
+
       module InstanceMethods
         def current_emoji
           harvester.harvest
@@ -24,18 +29,11 @@ class Roda
         private
 
         def storage
-          @_store ||= EmojiStore.new(redis)
+          @_store ||= EmojiStore.new(opts[:redis])
         end
 
         def harvester
           @_harvester ||= EmojiHarvester.new(Slack.client)
-        end
-
-        def redis
-          @_redis ||= begin
-            _redis_url = ENV['REDIS_URL'] || ENV['REDISTOGO_URL']
-            Redis.new(url: _redis_url)
-          end
         end
       end
     end
