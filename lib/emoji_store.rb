@@ -48,7 +48,11 @@ class EmojiStore
     added = new.keys - old.keys
     removed = old.keys - new.keys
 
-    { added: added, removed: removed }
+    { added: diff_apply(new, added), removed: diff_apply(old, removed) }
+  end
+
+  def diff_apply(hash, selected)
+    hash.select {|k, _v| selected.include? k }
   end
 
   def store_key(date=Date.today)

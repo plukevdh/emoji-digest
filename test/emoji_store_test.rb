@@ -77,7 +77,11 @@ describe EmojiStore do
       new_set = emoots.merge(hey: 'http://com.com/dawg.png', facebool: "http://facebool.com/mine.png")
       new_set.delete(:wat)
 
-      assert_equal({added: [:hey, :facebool], removed: [:wat]}, store.new_since_last(new_set))
+      assert_equal({added:
+                        {hey: 'http://com.com/dawg.png',
+                         facebool: "http://facebool.com/mine.png"},
+                    removed: {wat: "http://a-url.com/img.jpg",}
+                   }, store.new_since_last(new_set))
       fake_redis.verify
     end
   end
@@ -89,7 +93,7 @@ describe EmojiStore do
       fake_redis.expect(:hgetall, emoots, ['current_emooj:year:2008:week:31'])
       new_set = emoots.merge(hey: 'http://com.com/dawg.png')
 
-      assert_equal({added: [:hey], removed: []}, store.new_since_date(new_set, date))
+      assert_equal({added: {hey: 'http://com.com/dawg.png'}, removed: {}}, store.new_since_date(new_set, date))
       fake_redis.verify
     end
 
@@ -98,7 +102,7 @@ describe EmojiStore do
       fake_redis.expect(:exists, true, [store.class::OLDEST_SET])
       fake_redis.expect(:hgetall, emoots, [store.class::OLDEST_SET])
 
-      assert_equal({added: [], removed: []}, store.new_since_date(emoots, date))
+      assert_equal({added: {}, removed: {}}, store.new_since_date(emoots, date))
       fake_redis.verify
     end
   end
