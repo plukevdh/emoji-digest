@@ -7,6 +7,7 @@ class App < Roda
          ext: "html.haml",
          engine: 'haml'
   plugin :emoji
+  plugin :assets, css: ['emoji.css']
 
   Slack.configure do |config|
     config.token = ENV.fetch('SLACK_TOKEN')
@@ -29,5 +30,7 @@ class App < Roda
         view 'digest', locals: { emoji: digest_since(date).sort, date: date }
       end
     end
+
+    r.assets
   end
 end
