@@ -22,7 +22,8 @@ class App < Roda
 
     r.on "digest" do
       r.get true do
-        view 'digest', locals: { emoji: digest.sort }
+        current = Date.today
+        r.redirect "/digest/#{current.year}/#{current.cweek}"
       end
 
       r.on ":year/:week" do |year, week|

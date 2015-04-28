@@ -4,5 +4,9 @@
     = assets(:css)
 
   %body
+    %nav
+      %a{ href: '/current' } Current
+      %a{ href: '/digest' } Digest
+
     #content
       = yield
