@@ -5,7 +5,6 @@ Rake::TestTask.new do |t|
   t.pattern = "test/**/*_test.rb"
 end
 
-
 namespace :emoji do
   desc 'Collect and store the current emoji set'
   task :collect do
@@ -24,3 +23,5 @@ namespace :emoji do
     end
   end
 end
+
+task :default => [:test]
