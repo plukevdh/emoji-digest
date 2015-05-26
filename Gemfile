@@ -6,6 +6,7 @@ gem 'rake'
 gem 'redis'
 gem 'slack-api'
 gem 'roda'
+gem 'activesupport'
 
 gem 'haml'
 

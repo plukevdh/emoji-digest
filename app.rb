@@ -2,6 +2,8 @@ $LOAD_PATH.unshift "./lib"
 require 'roda'
 require './roda/plugins/emoji'
 
+require 'active_support/core_ext/date/calculations'
+
 class App < Roda
   plugin :render,
          ext: "html.haml",
