@@ -16,7 +16,7 @@ class App < Roda
   end
 
   route do |r|
-    r.root { r.redirect "/current" }
+    r.root { r.redirect "/digest" }
 
     r.on "current" do
       view 'emoji', locals: { emoji: cached_emoji.sort }
