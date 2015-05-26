@@ -1,9 +1,8 @@
 %h1 Digest Emoji
-- if defined? date
-  %h3
-    change since
-    = date.strftime("%m/%d/%Y")
-    to now
+%h3
+  change since
+  = date.strftime("%m/%d/%Y")
+  to now
 
 - emoji.each do |group, collection|
   %h3= group.capitalize

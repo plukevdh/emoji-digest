@@ -24,12 +24,12 @@ class App < Roda
 
     r.on "digest" do
       r.get true do
-        current = Date.today
-        r.redirect "/digest/#{current.year}/#{current.cweek}"
+        beginning = Date.today.beginning_of_week
+        r.redirect "/digest/#{beginning.year}/#{beginning.month}/#{beginning.day}"
       end
 
-      r.on ":year/:week" do |year, week|
-        date = Date.strptime "#{year},#{week}", "%Y,%W"
+      r.on ":year/:month/:day" do |year, month, day|
+        date = Date.strptime "#{year}/#{month}/#{day}", "%Y/%m/%d"
         view 'digest', locals: { emoji: digest_since(date).sort, date: date }
       end
     end
