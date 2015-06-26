@@ -9,6 +9,7 @@ class App < Roda
          ext: "html.haml",
          engine: 'haml'
   plugin :emoji
+  plugin :json
   plugin :assets, css: ['emoji.css']
 
   Slack.configure do |config|
@@ -31,6 +32,19 @@ class App < Roda
       r.on ":year/:month/:day" do |year, month, day|
         date = Date.strptime "#{year}/#{month}/#{day}", "%Y/%m/%d"
         view 'digest', locals: { emoji: digest_since(date), date: date }
+      end
+    end
+
+    r.on "json" do
+
+      r.get true do
+        beginning = Date.today.beginning_of_week
+        r.redirect "/json/#{beginning.year}/#{beginning.month}/#{beginning.day}"
+      end
+
+      r.on ":year/:month/:day" do |year, month, day|
+        date = Date.strptime "#{year}/#{month}/#{day}", "%Y/%m/%d"
+        { emoji: digest_since(date), date: date }
       end
     end
 
