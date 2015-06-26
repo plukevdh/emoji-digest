@@ -30,7 +30,7 @@ class App < Roda
 
       r.on ":year/:month/:day" do |year, month, day|
         date = Date.strptime "#{year}/#{month}/#{day}", "%Y/%m/%d"
-        view 'digest', locals: { emoji: digest_since(date).sort, date: date }
+        view 'digest', locals: { emoji: digest_since(date), date: date }
       end
     end
 

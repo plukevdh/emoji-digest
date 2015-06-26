@@ -52,7 +52,7 @@ class EmojiStore
   end
 
   def diff_apply(hash, selected)
-    hash.select {|k, _v| selected.include? k }
+    hash.select {|k, _v| selected.include? k }.sort
   end
 
   def store_key(date=Date.today)
