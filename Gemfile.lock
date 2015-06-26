@@ -68,3 +68,6 @@ DEPENDENCIES
   roda
   shotgun
   slack-api
+
+BUNDLED WITH
+   1.10.3
