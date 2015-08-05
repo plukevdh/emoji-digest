@@ -26,6 +26,13 @@ class Roda
           storage.new_since_date(current_emoji, date)
         end
 
+        def random(count)
+          items = cached_emoji
+          random_keys = items.keys.sample(count || 4)
+
+          Hash[random_keys.zip(items.values_at(*random_keys))]
+        end
+
         private
 
         def storage

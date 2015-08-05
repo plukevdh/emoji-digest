@@ -1,0 +1,12 @@
+%h1
+  Random Emoji!
+
+%h3 Keys
+
+= random.keys.map {|k| ":#{k}:" }.join(' ')
+
+%h3 Images
+
+- random.values.each do |url|
+  %img{ src: url, width: '18', height: '18' }
+
