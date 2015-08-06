@@ -28,7 +28,9 @@ class Roda
 
         def random(count)
           items = cached_emoji
-          random_keys = items.keys.sample(count || 4)
+          count = count ? count.to_i : 4
+
+          random_keys = items.keys.sample(count)
 
           Hash[random_keys.zip(items.values_at(*random_keys))]
         end

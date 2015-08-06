@@ -34,7 +34,7 @@ class App < Roda
     end
 
     r.on "random" do
-      view 'random', locals: { random: random(params[:count].to_i) }
+      view 'random', locals: { random: random(params[:count]) }
     end
 
     r.on "digest" do
@@ -59,7 +59,7 @@ class App < Roda
       end
 
       r.on "random" do
-        { emoji: random(params[:count].to_i) }
+        { emoji: random(params[:count]) }
       end
     end
 
